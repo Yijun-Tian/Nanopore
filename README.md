@@ -1,2 +1,3 @@
 # Nanopore
-Some PERL script used to parse Nanopore sequenicng results
+Some PERL script I used to parse Nanopore sequenicng results
+
