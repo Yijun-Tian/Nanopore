@@ -1,3 +1,4 @@
 # Nanopore
 Some PERL script I used to parse Nanopore sequenicng results
 
+![Picture1](https://github.com/user-attachments/assets/338a8778-32f5-424f-95b2-aa01ea7a1fe2)
