@@ -2,7 +2,7 @@
 # Fine Mapping Regulatory Variants by Characterizing Native CpG Methylation with Nanopore Long Read Sequencing 
 Some PERL scripts I developed to parse Nanopore DNA sequenicng data.
 
-![Optional Text] (https://github.com/Yijun-Tian/Nanopore/blob/main/NanoporeMethylationUse.png)
+![Picture1](https://github.com/Yijun-Tian/Nanopore/blob/main/NanoporeMethylationUse.png)
 
 **_MMMLparse.pl_**: Generate in-silico bisulfite conversion alignments from MM/ML BAM. The perl script is aware of indel and works for alignment report MM/ML tags on the top strand of SEQ, i.e. with C+m in MM:Z:tag.  
   Need to set the **base modification threshold** empirically, say ML>=204, roughly 80% confident that the CpG site is modified.  
