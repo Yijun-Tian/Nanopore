@@ -1,5 +1,5 @@
 
-# Fine Mapping Regulatory Variants by Characterizing Native CpG Methylation with Nanopore Long Read Sequencing 
+# Fine Mapping Regulatory Variants by Nanopore Long Read Sequencing 
 Some PERL scripts I developed to parse Nanopore DNA sequenicng data.
 
 ![Picture1](https://github.com/Yijun-Tian/Nanopore/blob/main/NanoporeMethylationUse.png)
