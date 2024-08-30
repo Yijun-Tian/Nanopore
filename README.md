@@ -28,5 +28,5 @@ TTGTACTT **__TG__** TTCAGTTA **__TG__** TATTGCTTTCTACCACACACATGCTCTTCTGTTTCCTTTT
 
 **_getHaplo_SE_cgOnly.pl_**: Generate methylation pattern from in-silico converted nanopore base calling BAM files.  This script is adapted from MONOD2 script "getHaplo_PE_cgOnly.pl"  
 
-
+sebam2cghap.sh /mnt/raid0/Yijun_Tian/MONOD2/allcpg/hg38.allcpgs.txt.gz ${i}.mod_mappings.5mC.haplotype1.sorted.bam $i.hg38.haplotype
 
