@@ -18,15 +18,26 @@ Check a few short read to make sure the conversion works properly. In below alig
 samtools view -F 20 example.bam | awk '{if (length($10)<=500) print $10,$NF}' | grep CG
 
 ```
-TTGTACTT **__CG__** TTCAGTTA **__CG__** TATTGCTTTCTACCACACACATGCTCTTCTGTTTCCTTTTGTTCAACAGATTTCACTGGCCCATT **__CG__** CAGAAAAATGGTAACAACCTGTTAGCTGTTTTCATCAATTTATGTGATGTATTGTGTATTAATTACTAGTATTCTCTATGTCATATTATTATTATTAGAGATGATGGAAGAGGAAGGGCATTGTATATTAATTATCAGTATATTTCATATATATATATGTATGTATGTGTATTTGTTTGAGACAAGGTCTTGCTTTGTTGCCCAACTGGAGTGCAGCAGCACTGCAGCCTTGAGCTCCTGGCCTTGAACTCCTGGCCTCAAGTGATCCTCCCACCTTGGACTCCCAAAGTGCTAGGATTACAGG **__CG__** TGAGTCACCATGCCCAGCT ML:B:C,24,4,255,255
+TTGTACTT **__CG__** TTCAGTTA **__CG__** TATTGCTTTCTACCACACACATGCTCTTCTGTTTCCTTTTGTTCAACAGATTTCACTGGCCCATT **__CG__** TTA...AGG **__CG__** TGAGTCACCATGCCCAGCT ML:B:C,24,4,255,255
 ```
 samtools view -F 20 output_prefix.sam | awk '{if (length($10)<=500) print $10,$NF}' | grep [CT]G
 ```
-TTGTACTT **__TG__** TTCAGTTA **__TG__** TATTGCTTTCTACCACACACATGCTCTTCTGTTTCCTTTTGTTCAACAGATTTCACTGGCCCATT **_CG_** CAGAAAAATGGTAACAACCTGTTAGCTGTTTTCATCAATTTATGTGATGTATTGTGTATTAATTACTAGTATTCTCTATGTCATATTATTATTATTAGAGATGATGGAAGAGGAAGGGCATTGTATATTAATTATCAGTATATTTCATATATATATATGTATGTATGTGTATTTGTTTGAGACAAGGTCTTGCTTTGTTGCCCAACTGGAGTGCAGCAGCACTGCAGCCTTGAGCTCCTGGCCTTGAACTCCTGGCCTCAAGTGATCCTCCCACCTTGGACTCCCAAAGTGCTAGGATTACAGG **_CG_** TGAGTCACCATGCCCAGCT ML:B:C,24,4,255,255
+TTGTACTT **__TG__** TTCAGTTA **__TG__** TATTGCTTTCTACCACACACATGCTCTTCTGTTTCCTTTTGTTCAACAGATTTCACTGGCCCATT **_CG_** TAA...AGG **_CG_** TGAGTCACCATGCCCAGCT ML:B:C,24,4,255,255
 
 
 
-**_getHaplo_SE_cgOnly.pl_**: Generate methylation pattern from in-silico converted nanopore base calling BAM files.  This script is adapted from MONOD2 script "getHaplo_PE_cgOnly.pl"  
+**_getHaplo_SE_cgOnly.pl_**: Generate methylation pattern from in-silico converted nanopore base calling BAM files.  
+This script is adapted from MONOD2 script "getHaplo_PE_cgOnly.pl"
+Need to generate a CpG position file from the FASTA file, and then run sebam2cghap.sh to call the PERL script (getHaplo_SE_cgOnly.pl)
+```
+seqkit locate -P -p CG hg38.align.fa | awk '{if (NR>1) print $1":W\t"$5"\t"$7}' > hg38.allcpgs.txt
+gzip hg38.allcpgs.txt
+sebam2cghap.sh hg38.allcpgs.txt.gz output_prefix.sorted.bam output_prefix
+```
 
-sebam2cghap.sh /mnt/raid0/Yijun_Tian/MONOD2/allcpg/hg38.allcpgs.txt.gz ${i}.mod_mappings.5mC.haplotype1.sorted.bam $i.hg38.haplotype
+
+
+
+
+
 
