@@ -28,7 +28,7 @@ then
 fi
 
 # Merge hapinfo files to target regions
-perl /mnt/raid0/Yijun_Tian/MONOD2/bin/mergeHaploInfo_bed.pl $binFile < $haploInfo > results/HaploInfo/$outname.merged.hapinfo.txt
+perl mergeHaploInfo_bed.pl $binFile < $haploInfo > $outname.merged.hapinfo.txt
 
 # Call methylation haplotype blocks
-perl /mnt/raid0/Yijun_Tian/MONOD2/bin/cgHap2MHBs_parallel.pl results/HaploInfo/$outname.merged.hapinfo.txt $minR2 $snpFile $outname
+perl cgHap2MHBs_parallel.pl $outname.merged.hapinfo.txt $minR2 $snpFile $outname
