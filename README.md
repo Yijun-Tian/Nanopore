@@ -36,6 +36,14 @@ sebam2cghap.sh hg38.allcpgs.txt.gz output_prefix.sorted.bam output_prefix
 ```
 
 
+**_cghap2mhbs.sh_**: Define methylation haplotype block (MHB) with the methylation pattern file (output_prefix.cgPE.hapinfo.txt).
+This script merges methylation pattern file into high-depth regions and call MHB with minimum LD R2 cutoff.
+
+
+```
+bedtools genomecov -bg -split -ibam output_prefix.sorted.bam | awk -v min=10 '$4>=min { print $1"\t"$2"\t"$3}' | bedtools merge -d 10 -i - | awk '$3-$2>80 {print $1"\t"$2"\t"$3"\t"$3-$2+1}' > output_prefix.RD10_80up.genomecov.bed
+cghap2mhbs.sh output_prefix.cgPE.hapinfo.txt output_prefix.RD10_80up.genomecov.bed 0.5 dbSnp153.txt output_prefix.r2p5
+```
 
 
 
