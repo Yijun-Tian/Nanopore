@@ -24,7 +24,7 @@ sub run_process{
 #  my $min_r2 = 
 #  my $cg_snp_bed_file =
   my $file = shift;
-  my $cmd = "/mnt/raid0/Yijun_Tian/MONOD2/bin/hapInfo_maskSNPs2mld_block.pl hapinfo_$file.tmp $minR2 $snpBedFile > $outNamePrefix.$file";
+  my $cmd = "hapInfo_maskSNPs2mld_block.pl hapinfo_$file.tmp $minR2 $snpBedFile > $outNamePrefix.$file";
   system($cmd);
   unlink("hapinfo_$file.tmp");
 }
