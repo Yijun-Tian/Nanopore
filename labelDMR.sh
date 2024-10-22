@@ -48,27 +48,28 @@ while IFS= read -r line; do
     for j in $(ls *.sorted.bed | rev | cut -c 12- | rev | sort | uniq );
         do
 	  awk '{FS=OFS="\t"} $4~/m/ && $5>=5 {print $1,$2,$3,$11}' $j.sorted.bed | bedtools sort -i - > $j.bg
+          if [ -s $j.bg ]; then
+             echo 'goodboy'
+          else
+             rm -f $j.bg
+          fi
         done
     	grp1=$(ls ${id}@${ref}_*.bg | paste -sd,)
     	n1=$(echo $grp1 | sed 's/,/\n/g' | wc -l)
     	grp2=$(ls ${id}@${alt_array[0]}_*.bg | paste -sd,)
     	n2=$(echo $grp2 | sed 's/,/\n/g' | wc -l)
     if [ "${n1}" -ge 3 ] && [ "${n2}" -ge 3 ]; then
-        perl ../../metilene_v0.2-8/metilene_input.pl --in1 $grp1 --in2 $grp2 --out $id.ref.alt.5mCG.input --h1 ref --h2 alt
-        ../../metilene_v0.2-8/metilene_linux64 -t 8 -a ref -b alt -M 2000 -m 3 $id.ref.alt.5mCG.input > $id.ref.alt.5mCG.output 
-        awk -v va=$variant_string -v N1=$n1 -v N2=$n2 '{FS=OFS="\t"}{if ($7<=0.05 || $8<=0.05) print $0,va,N1,N2}' $id.ref.alt.5mCG.output >> ../$output
-        cd ..
-        mv $id.bg/*.input ./
-        rm -rf $id.bg/
-        rm $id.bam
-        rm $id.bam.bai
+        perl /share/lab_wangl/Yijun_Tian/WGS_Prostate/metilene_v0.2-8/metilene_input.pl --in1 $grp1 --in2 $grp2 --out $id.ref.alt.5mCG.input --h1 ref --h2 alt
+        /share/lab_wangl/Yijun_Tian/WGS_Prostate/metilene_v0.2-8/metilene_linux64 -t 4 -a ref -b alt -d 10 -M 300 -m 10 $id.ref.alt.5mCG.input > $id.ref.alt.5mCG.output
+        awk -v va=$variant_string -v N1=$n1 -v N2=$n2 '{FS=OFS="\t"}{if ($7<=0.05 || $8<=0.05) print $0,va,N1,N2}' $id.ref.alt.5mCG.output >> $output
+        mv $id.ref.alt.5mCG.input ../inputs/
      else
-        rm -rf $id.bg/
-        rm $id.bam
-        rm $id.bam.bai
-        cd ..
+        echo "this is a mission impossible"
      fi
- 
+     cd /share/lab_wangl/Yijun_Tian/WGS_Prostate/labelAlign/
+     rm -rf $id.bg/
+     rm $id.bam
+     rm $id.bam.bai
 
 done < "$input_vcf"
 
