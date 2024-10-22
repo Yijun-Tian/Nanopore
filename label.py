@@ -66,8 +66,8 @@ def main(input_bam, output_bam, variants):
                 else:
                     read.set_tag("VA", tag_info)  # Set the VA tag for the first time
 
-             # Only write the read if it has a VA tag
-            if read.has_tag("VA"):
+             # Only write the read if it has a VA tag and is a primary alignment
+             if not read.is_secondary and not read.is_supplementary and read.has_tag("VA"):
                 bam_out.write(read)
 
     # Close the BAM and VCF files
