@@ -32,7 +32,7 @@ Need to generate a CpG position file from the FASTA file, and then run sebam2cgh
 ```
 seqkit locate -P -p CG hg38.align.fa | awk '{if (NR>1) print $1":W\t"$5"\t"$7}' > hg38.allcpgs.txt
 gzip hg38.allcpgs.txt
-sebam2cghap.sh hg38.allcpgs.txt.gz output_prefix.sorted.bam output_prefix
+sebam2cghap.sh hg38.allcpgs.txt.gz output_prefix.sorted.bam > output_prefix.cgPE.hapinfo.txt
 ```
 
 
