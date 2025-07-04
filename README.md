@@ -1,6 +1,6 @@
 
 # Fine Mapping Regulatory Variants by Nanopore Long Read Sequencing 
-Some PERL scripts to parse Nanopore DNA sequenicng data.
+Some PERL scripts to parse Nanopore DNA sequencing data.
 
 ![Picture1](https://github.com/Yijun-Tian/Nanopore/blob/main/NanoporeMethylationUse.png)
 
