@@ -58,7 +58,7 @@ sub getAlignmentInfo{
 	$alignment{"qual"} = $tmp[10];
 	$alignment{"ps"} = (grep { /^PS:i:/ } @tmp) [0];
 	$alignment{"hp"} = (grep { /^HP:i:/ } @tmp) [0];
-	$alignment{"mm"} = (grep { /^MM:Z:C+/ } @tmp) [0];
+	$alignment{"mm"} = (grep { /^MM:Z:C\\+/ } @tmp) [0];
 	$alignment{"ml"} = (grep { /^ML:B:C,/ } @tmp) [0];
 	$alignment{"qs"} = (grep { /^qs:i:/ } @tmp) [0];
 	return %alignment;
