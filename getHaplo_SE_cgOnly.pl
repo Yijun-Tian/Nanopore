@@ -232,7 +232,7 @@ sub getAlignmentInfo{
 
 sub printUsage{
 	print " Usage: \n";
-	print " getHaplo_PE_cgOnly.pl [cpg position list] < [sam file sorted by name] \n";
+	print " getHaplo_SE_cgOnly.pl [bam file] [cpg position list] < [sam file sorted by name] \n";
 	exit 0;
 }
 
